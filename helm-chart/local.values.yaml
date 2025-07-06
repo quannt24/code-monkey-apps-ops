@@ -9,3 +9,7 @@ applications:
         path: helm-chart
         helm:
           releaseName: cert-manager-app
+          valueFiles:
+            # - values.yaml
+            # - {env}.values.yaml
+            - local-secret.values.yaml
