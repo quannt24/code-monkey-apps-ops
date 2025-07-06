@@ -13,6 +13,7 @@ applications:
     # WARNING: Access to Web UIs may lost if cert-manager is removed.
     finalizers:
       - resources-finalizer.argocd.argoproj.io
+    project: default
     sources:
       - repoURL: https://github.com/quannt24/code-monkey-cert-manager-ops.git
         targetRevision: main
