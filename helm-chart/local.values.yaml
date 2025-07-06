@@ -6,3 +6,6 @@ applications:
     sources:
       - repoURL: https://github.com/quannt24/code-monkey-cert-manager-ops.git
         targetRevision: trunk
+        path: helm-chart
+        helm:
+          releaseName: cert-manager-app
