@@ -4,7 +4,34 @@ global:
 # -- Deploy Argo CD Applications within this helm release
 # @default -- `{}` (See [values.yaml])
 ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
-applications: {}
+applications:
+  cert-manager-app:
+    namespace: argocd
+    # Without finalizers, the Application is removed but its resources are left behind.
+    # With finalizers enabled, it's a "cascading delete" both the Application
+    # and its resources are removed
+    # WARNING: Access to Web UIs may lost if cert-manager is removed.
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    sources:
+      - repoURL: https://github.com/quannt24/code-monkey-cert-manager-ops.git
+        targetRevision: main
+        path: helm-chart
+        helm:
+          releaseName: cert-manager-app
+          # valueFiles:
+          #   - values.yaml
+          #   - {env}.values.yaml
+          #   - {env}-secret.values.yaml
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: cert-manager
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
 
 # -- Deploy Argo CD Projects within this helm release
 # @default -- `{}` (See [values.yaml])

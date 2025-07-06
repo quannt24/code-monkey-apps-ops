@@ -1,2 +1,8 @@
 global:
   baseDomain: local
+
+applications:
+  cert-manager-app:
+    sources:
+      - repoURL: https://github.com/quannt24/code-monkey-cert-manager-ops.git
+        targetRevision: trunk
