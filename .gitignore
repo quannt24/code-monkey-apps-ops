@@ -1,0 +1,11 @@
+k8s-secret/
+secret/
+*-secret.yaml
+*-secret.yml
+# Plain secret files
+*.dec.yaml
+
+charts/
+Chart.lock
+
+helm-chart/templated.yaml

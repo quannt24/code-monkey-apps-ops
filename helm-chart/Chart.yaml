@@ -1,0 +1,14 @@
+apiVersion: v2
+name: code-monkey-apps-app
+description: A Helm chart for managing additional Argo CD Applications and Projects
+type: application
+version: 0.0.0
+home: https://github.com/quannt24/code-monkey-apps-ops
+icon: https://argo-cd.readthedocs.io/en/stable/assets/logo.png
+keywords:
+  - argoproj
+  - argocd
+  - gitops
+maintainers:
+  - name: quannt24
+    url: https://github.com/quannt24

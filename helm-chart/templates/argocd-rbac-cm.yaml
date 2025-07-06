@@ -1,0 +1,41 @@
+# See: https://argo-cd.readthedocs.io/en/stable/operator-manual/rbac/
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-rbac-cm
+  namespace: argocd
+data:
+  # Argo CD has two pre-defined roles but RBAC configuration allows defining roles and groups (see below).
+  #   role:readonly - read-only access to all resources
+  #   role:admin - unrestricted access to all resources
+  # These default built-in role definitions can be seen in builtin-policy.csv
+
+  policy.default: role:readonly
+
+  # Group: Allows to assign authenticated users/groups to internal roles.
+  # Syntax: g, <user/group>, <role>
+
+  # Policy: Allows to assign permissions to an entity.
+  # Syntax: p, <role/user/group>, <resource>, <action>, <object>, <effect>
+
+  # All resources except application-specific permissions (see next bullet):
+  #   p, <role/user/group>, <resource>, <action>, <object>
+  # Applications, applicationsets, logs, and exec (which belong to an AppProject):
+  #   p, <role/user/group>, <resource>, <action>, <appproject>/<object>
+  policy.csv: |
+    p, role:developer, applications, *, default/apps-app, deny
+
+    p, role:developer, applications, get, */*, allow
+    p, role:developer, applications, update, */*, allow
+    p, role:developer, applications, delete, */*, allow
+    p, role:developer, applications, sync, */*, allow
+    p, role:developer, applications, action, */*, allow
+    p, role:developer, applications, override, */*, allow
+    p, role:developer, applications, action/apps/Deployment/restart, */*, allow
+
+    p, role:developer, logs, get, *, allow
+    p, role:developer, exec, create, */*, allow
+
+    g, group:developer, role:developer
+    g, developer, role:developer

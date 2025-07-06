@@ -1,0 +1,31 @@
+global:
+  baseDomain: local
+
+# -- Deploy Argo CD Applications within this helm release
+# @default -- `{}` (See [values.yaml])
+## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+applications: {}
+
+# -- Deploy Argo CD Projects within this helm release
+# @default -- `{}` (See [values.yaml])
+## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
+## Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argocd-apps/values.yaml
+projects: {}
+
+# -- Deploy Argo CD ApplicationSets within this helm release
+# @default -- `{}` (See [values.yaml])
+## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+## Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argocd-apps/values.yaml
+applicationsets: {}
+
+# --  Deploy Argo CD Applications/ApplicationSets/Projects within this helm release
+# @default -- `[]` (See [values.yaml])
+## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
+## Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argocd-apps/values.yaml
+itemTemplates: []
+
+# -- DEPRECATED - Please refer [Deprecation Notice](https://github.com/argoproj-labs/argocd-extensions?tab=readme-ov-file#deprecation-notice) for more info.
+# @default -- `{}` (See [values.yaml])
+## This function in tech preview stage, do expect unstability or breaking changes in newer versions. Bump image.tag if necessary.
+## Ref: https://github.com/argoproj-labs/argocd-extensions
+extensions: {}
