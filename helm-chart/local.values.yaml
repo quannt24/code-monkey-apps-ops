@@ -13,3 +13,16 @@ applications:
             # - values.yaml
             # - {env}.values.yaml
             - local-secret.values.yaml
+
+  monitoring-app:
+    sources:
+      - repoURL: https://github.com/quannt24/code-monkey-monitoring-ops.git
+        targetRevision: trunk
+        path: helm-chart
+        helm:
+          releaseName: monitoring-app
+          valueFiles:
+            - loki-single-binary.values.yaml
+            - values.yaml
+            - local.values.yaml
+            - local-secret.values.yaml
