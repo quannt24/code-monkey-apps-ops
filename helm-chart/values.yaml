@@ -63,7 +63,56 @@ applications:
 # @default -- `{}` (See [values.yaml])
 ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
 ## Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argocd-apps/values.yaml
-projects: {}
+projects:
+  monitoring:
+    namespace: argocd
+    permitOnlyProjectScopedClusters: false
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    description: Project for monitoring applications
+    sourceRepos:
+      # - '*'
+      - git@github.com:quannt24/code-monkey-monitoring-ops.git
+    destinations:
+      - namespace: monitoring
+        server: https://kubernetes.default.svc
+    clusterResourceWhitelist: []
+    clusterResourceBlacklist: []
+    # # Allow all namespaced-scoped resources to be created,
+    # except for ResourceQuota, LimitRange, NetworkPolicy
+    namespaceResourceBlacklist:
+    - group: ''
+      kind: ResourceQuota
+    - group: ''
+      kind: LimitRange
+    - group: ''
+      kind: NetworkPolicy
+      orphanedResources: {}
+      roles: []
+    namespaceResourceWhitelist: []
+
+    # Enables namespace orphaned resource monitoring.
+    orphanedResources:
+      warn: false
+
+    roles: []
+
+    # https://argo-cd.readthedocs.io/en/stable/user-guide/sync_windows/
+    # syncWindows:
+    # - kind: allow
+    #   schedule: '10 1 * * *'
+    #   duration: 1h
+    #   applications:
+    #   - '*-prod'
+    #   manualSync: true
+
+    # signatureKeys:
+    # - keyID: ABCDEF1234567890
+
+    # When using Applications-in-any-namespace, this field determines which namespaces this AppProject permits
+    # Applications to reside in. Details: https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/
+    # sourceNamespaces:
+    #   - argocd
 
 # -- Deploy Argo CD ApplicationSets within this helm release
 # @default -- `{}` (See [values.yaml])
