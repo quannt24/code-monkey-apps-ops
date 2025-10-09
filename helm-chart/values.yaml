@@ -87,8 +87,6 @@ projects:
       kind: LimitRange
     - group: ''
       kind: NetworkPolicy
-      orphanedResources: {}
-      roles: []
     namespaceResourceWhitelist: []
 
     # Enables namespace orphaned resource monitoring.
