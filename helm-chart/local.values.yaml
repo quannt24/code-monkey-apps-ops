@@ -26,3 +26,15 @@ applications:
   #           - values.yaml
   #           - local.values.yaml
   #           - local-secret.values.yaml
+
+applicationsets:
+  monitoring:
+    template:
+      spec:
+        source:
+          helm:
+            valueFiles:
+              - loki-single-binary.values.yaml
+              - values.yaml
+              - local.values.yaml
+              - local-secret.values.yaml
