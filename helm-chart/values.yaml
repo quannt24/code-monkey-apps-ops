@@ -73,6 +73,7 @@ projects:
     sourceRepos:
       # - '*'
       - https://github.com/quannt24/code-monkey-monitoring-ops.git
+      - https://grafana.github.io/helm-charts
     destinations:
       - namespace: monitoring
         server: https://kubernetes.default.svc
@@ -160,9 +161,6 @@ applicationsets:
         #   kind: Deployment
         #   jsonPointers:
         #   - /spec/replicas
-        info:
-        - name: url
-          value: https://argoproj.github.io/
 
 # --  Deploy Argo CD Applications/ApplicationSets/Projects within this helm release
 # @default -- `[]` (See [values.yaml])
