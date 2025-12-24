@@ -77,7 +77,11 @@ projects:
     destinations:
       - namespace: monitoring
         server: https://kubernetes.default.svc
-    clusterResourceWhitelist: []
+    clusterResourceWhitelist:
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRoleBinding'
+      - group: 'rbac.authorization.k8s.io'
+        kind: 'ClusterRole'
     clusterResourceBlacklist: []
     # # Allow all namespaced-scoped resources to be created,
     # except for ResourceQuota, LimitRange, NetworkPolicy
