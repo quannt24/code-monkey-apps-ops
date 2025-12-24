@@ -116,53 +116,53 @@ projects:
 # @default -- `{}` (See [values.yaml])
 ## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
 ## Ref: https://github.com/argoproj/argo-helm/blob/main/charts/argocd-apps/values.yaml
-applicationsets: {}
-  # monitoring:
-  #   namespace: argocd
-  #   finalizers:
-  #     - resources-finalizer.argocd.argoproj.io
-  #   syncPolicy:
-  #     # Set Application finalizer
-  #     preserveResourcesOnDeletion: false
-  #   goTemplate: true
-  #   generators:
-  #     - git:
-  #         repoURL: git@github.com:quannt24/code-monkey-monitoring-ops.git
-  #         revision: main
-  #         directories:
-  #           # Expected path pattern: apps/<namespace>/*/<app-name>
-  #           - path: apps/*
-  #   template:
-  #     metadata:
-  #       name: '{{index .path.segments 1}}-{{.path.basenameNormalized}}'
-  #       annotations: {}
-  #     spec:
-  #       project: monitoring
-  #       source:
-  #         repoURL: https://github.com/quannt24/code-monkey-monitoring-ops.git
-  #         targetRevision: main
-  #         path: '{{.path.path}}'
-  #         helm:
-  #           releaseName: '{{index .path.segments 1}}-{{.path.basenameNormalized}}'
-  #           valueFiles:
-  #             - values.yaml
-  #             # - {env}.values.yaml
-  #             # - {env}-secret.values.yaml
-  #       destination:
-  #         server: https://kubernetes.default.svc
-  #         namespace: '{{index .path.segments 1}}'
-  #       syncPolicy:
-  #         automated:
-  #           prune: true
-  #           selfHeal: true
-  #       ignoreDifferences:
-  #       - group: apps
-  #         kind: Deployment
-  #         jsonPointers:
-  #         - /spec/replicas
-  #       info:
-  #       - name: url
-  #         value: https://argoproj.github.io/
+applicationsets:
+  monitoring:
+    namespace: argocd
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    syncPolicy:
+      # Set Application finalizer
+      preserveResourcesOnDeletion: false
+    goTemplate: true
+    generators:
+      - git:
+          repoURL: git@github.com:quannt24/code-monkey-monitoring-ops.git
+          revision: main
+          directories:
+            # Expected path pattern: apps/<namespace>/*/<app-name>
+            - path: apps/*
+    template:
+      metadata:
+        name: '{{index .path.segments 1}}-{{.path.basenameNormalized}}'
+        annotations: {}
+      spec:
+        project: monitoring
+        source:
+          repoURL: https://github.com/quannt24/code-monkey-monitoring-ops.git
+          targetRevision: main
+          path: '{{.path.path}}'
+          helm:
+            releaseName: '{{index .path.segments 1}}-{{.path.basenameNormalized}}'
+            valueFiles:
+              - values.yaml
+              # - {env}.values.yaml
+              # - {env}-secret.values.yaml
+        destination:
+          server: https://kubernetes.default.svc
+          namespace: '{{index .path.segments 1}}'
+        syncPolicy:
+          automated:
+            prune: true
+            selfHeal: true
+        # ignoreDifferences:
+        # - group: apps
+        #   kind: Deployment
+        #   jsonPointers:
+        #   - /spec/replicas
+        info:
+        - name: url
+          value: https://argoproj.github.io/
 
 # --  Deploy Argo CD Applications/ApplicationSets/Projects within this helm release
 # @default -- `[]` (See [values.yaml])
