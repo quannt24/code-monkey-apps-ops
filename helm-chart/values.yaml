@@ -34,31 +34,6 @@ applications:
       syncOptions:
         - CreateNamespace=true
 
-  # monitoring-app:
-  #   namespace: argocd
-  #   finalizers:
-  #     - resources-finalizer.argocd.argoproj.io
-  #   project: default
-  #   sources:
-  #     - repoURL: https://github.com/quannt24/code-monkey-monitoring-ops.git
-  #       targetRevision: main
-  #       path: helm-chart
-  #       helm:
-  #         releaseName: monitoring-app
-  #         valueFiles:
-  #           - values.yaml
-  #           # - {env}.values.yaml
-  #           # - {env}-secret.values.yaml
-  #   destination:
-  #     server: https://kubernetes.default.svc
-  #     namespace: monitoring
-  #   syncPolicy:
-  #     automated:
-  #       prune: true
-  #       selfHeal: true
-  #     syncOptions:
-  #       - CreateNamespace=true
-
 # -- Deploy Argo CD Projects within this helm release
 # @default -- `{}` (See [values.yaml])
 ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/
