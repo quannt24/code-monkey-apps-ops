@@ -72,7 +72,7 @@ projects:
     description: Project for monitoring applications
     sourceRepos:
       # - '*'
-      - git@github.com:quannt24/code-monkey-monitoring-ops.git
+      - https://github.com/quannt24/code-monkey-monitoring-ops.git
     destinations:
       - namespace: monitoring
         server: https://kubernetes.default.svc
@@ -127,7 +127,7 @@ applicationsets:
     goTemplate: true
     generators:
       - git:
-          repoURL: git@github.com:quannt24/code-monkey-monitoring-ops.git
+          repoURL: https://github.com/quannt24/code-monkey-monitoring-ops.git
           revision: main
           directories:
             # Expected path pattern: apps/<namespace>/*/<app-name>
