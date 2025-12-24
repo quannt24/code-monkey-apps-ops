@@ -131,7 +131,7 @@ applicationsets:
           revision: main
           directories:
             # Expected path pattern: apps/<namespace>/*/<app-name>
-            - path: apps/*
+            - path: apps/*/*
     template:
       metadata:
         name: '{{index .path.segments 1}}-{{.path.basenameNormalized}}'
