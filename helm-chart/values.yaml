@@ -92,6 +92,18 @@ projects:
     # sourceNamespaces:
     #   - argocd
 
+  rfp:
+    namespace: argocd
+    permitOnlyProjectScopedClusters: false
+    finalizers:
+      - resources-finalizer.argocd.argoproj.io
+    description: Project for RFP applications
+    sourceRepos:
+      - https://grafana.github.io/helm-charts
+    destinations:
+      - namespace: rfp
+        server: https://kubernetes.default.svc
+
 # -- Deploy Argo CD ApplicationSets within this helm release
 # @default -- `{}` (See [values.yaml])
 ## Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/applicationset/
